@@ -9,6 +9,8 @@ package com.sqa.ala.helpers;
 
 import java.util.*;
 
+import com.sqa.ala.helpers.exceptions.*;
+
 public class AppBasics {
 
 	static Scanner scanner = new Scanner(System.in);
@@ -50,6 +52,32 @@ public class AppBasics {
 		System.out.println(question);
 		String input = scanner.nextLine();
 		int value = Integer.parseInt(input);
+		return value;
+	}
+
+	public static int requestInt(String question, int min, int max, String errorResponse) {
+		int value = 0;
+		boolean isValid = false;
+		String input = "";
+		while (!isValid) {
+			try {
+				System.out.println(question);
+				input = scanner.nextLine().trim();
+				value = Integer.parseInt(input);
+				if (value < min) {
+					throw new UnderMinRangeException();
+				} else if (value > max) {
+					throw new OverMaxRangeException();
+				}
+				isValid = true;
+			} catch (NumberFormatException e) {
+				System.out.println("You have not entered a valid numeric value (" + input + ")");
+			} catch (UnderMinRangeException e) {
+				System.out.println(errorResponse + " (" + input + ") [UNDER:" + min + "]");
+			} catch (OverMaxRangeException e) {
+				System.out.println(errorResponse + " (" + input + ") [OVER:" + max + "]");
+			}
+		}
 		return value;
 	}
 
