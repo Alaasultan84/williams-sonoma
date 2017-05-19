@@ -1,5 +1,5 @@
-# Basic Project
-## Basic Project Structure
+# Williams Sonoma Project
+## Williams Sonoma Project Structure
 
 *Default Structure for A Basic Project*
 
